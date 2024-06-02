@@ -12,13 +12,10 @@ import java.util.Map;
 public class BeerClientImpl implements BeerClient {
 
     public static final String BEER_PATH = "/api/v3/beer";
-    public static final String LOCALHOST = "http://localhost:8080";
     private final WebClient webClient;
 
     public BeerClientImpl(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder
-                .baseUrl(LOCALHOST)
-                .build();
+        this.webClient = webClientBuilder.build();
     }
 
     @Override
