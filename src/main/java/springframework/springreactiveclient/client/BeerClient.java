@@ -17,10 +17,18 @@ public interface BeerClient {
     //preferred over map since it has more functionality available while dealing with unknown JSON payload
     Flux<JsonNode> beerJsonList();
 
-//deserializing JSON payload with Jackson into POJO, so it is going to be a Flux of beers
+    //deserializing JSON payload with Jackson into POJO, so it is going to be a Flux of beers
     Flux<BeerDTO> beerDtoList();
 
     Mono<BeerDTO> getBeerById(String id);
 
     Flux<BeerDTO> getBeerByStyle(String beerStyle);
+
+    Mono<BeerDTO> createBeer(BeerDTO beerDTO);
+
+    Mono<BeerDTO> updateBeer(BeerDTO beerDTO);
+
+    Mono<BeerDTO> patchBeer(BeerDTO beerDTO);
+
+    Mono<Void> deleteBeer(BeerDTO beerDTO);
 }
