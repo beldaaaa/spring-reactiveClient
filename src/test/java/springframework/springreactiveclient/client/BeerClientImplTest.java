@@ -17,40 +17,50 @@ class BeerClientImplTest {
     @Test
     void beerList() {
         AtomicBoolean atomicBoolean = new AtomicBoolean(false);
-        beerClient.beerList().subscribe(response -> {
-            atomicBoolean.set(true);
-            //System.out.println(response);
-        });
+        beerClient.beerList()
+                .subscribe(response -> atomicBoolean.set(true));
         await().untilTrue(atomicBoolean);
     }
 
     @Test
     void beerMapList() {
         AtomicBoolean atomicBoolean = new AtomicBoolean(false);
-        beerClient.beerMapList().subscribe(response -> {
-            atomicBoolean.set(true);
-            //System.out.println(response);
-        });
+        beerClient.beerMapList()
+                .subscribe(response -> atomicBoolean.set(true));
         await().untilTrue(atomicBoolean);
     }
 
     @Test
     void beerJsonList() {
         AtomicBoolean atomicBoolean = new AtomicBoolean(false);
-        beerClient.beerJsonList().subscribe(response -> {
-            atomicBoolean.set(true);
-           //System.out.println(response.toPrettyString());
-        });
+        beerClient.beerJsonList()
+                .subscribe(response -> atomicBoolean.set(true));
         await().untilTrue(atomicBoolean);
     }
 
     @Test
     void beerDtoList() {
         AtomicBoolean atomicBoolean = new AtomicBoolean(false);
-        beerClient.beerDtoList().subscribe(response -> {
-            atomicBoolean.set(true);
-            //System.out.println(response.getBeerName());
-        });
+        beerClient.beerDtoList()
+                .subscribe(response -> atomicBoolean.set(true));
         await().untilTrue(atomicBoolean);
+    }
+
+    @Test
+    void getBeerById() {
+        AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+        beerClient.beerDtoList()
+                .flatMap(dto -> beerClient.getBeerById(dto.getId()))
+                .subscribe(byIdDto -> atomicBoolean.set(true));
+        await().untilTrue(atomicBoolean);
+    }
+
+    @Test
+    void getBeerByStyle() {
+        AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+        beerClient.getBeerByStyle("tocene")
+                .subscribe(response -> atomicBoolean.set(true));
+        await().untilTrue(atomicBoolean);
+
     }
 }
